@@ -1,19 +1,19 @@
 <html>
-<head><title>Daniel Ellis - coug36</title></head>
-<style type="text/css">
-<!--
-table {width: 100%;}
-td {text-align: center; vertical-align: middle;}
--->
-</style>
-<body onload="javascript:resize_table();">
-<table id="coug36"><tr><td>
-<iframe scrolling="no" height="140" frameborder="0" width="204" longdesc="http://live.xbox.com/member/coug36" title="coug36's Gamercard" src="http://gamercard.xbox.com/en-US/coug36.card"></iframe>
-</td></tr></table>
-<script type="text/javascript">
-<!--
-function resize_table() {(document.getElementsByTagName('table'))[0].style.height = window.innerHeight - 115;}
--->
-</script>
+<head>
+    <title>Daniel Ellis - coug36</title>
+    <style type="text/css">
+        body { margin: 0; text-align: center; position: relative; }
+        #gamercard { position: absolute; top: 50%; height: 135px; border: none; width: 200px; margin-top: -68px; }
+    </style>
+    <script type="text/javascript">
+        window.addEventListener('load', function() {
+            document.body.style.height = window.innerHeight;
+            document.getElementById('gamercard').style.visibility = '';
+        });
+    </script>
+</head>
+
+<body>
+    <iframe id="gamercard" style="visibility: hidden;" scrolling="no" longdesc="http://live.xbox.com/member/coug36" title="coug36's Gamercard" src="http://gamercard.xbox.com/en-US/coug36.card"></iframe>
 </body>
 </html>
