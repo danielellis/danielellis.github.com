@@ -1,0 +1,38 @@
+body {
+    font: 24px sans-serif;
+
+    /* Make the body a flex container that stretches over the entire viewport */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+section {
+    /* Include padding in the width calculations */
+    box-sizing: border-box;
+    padding: 10px;
+
+    /* Center the text vertically in each column */
+    display: flex;
+    align-items: center;
+}
+
+#left {
+    background-color: #f88;
+    flex: 0 0 180px;
+}
+
+#middle {
+    background-color: #8f8;
+    flex: 1 1 auto;
+}
+
+#right {
+    background-color: #88f;
+    flex: 0 0 200px;
+}
