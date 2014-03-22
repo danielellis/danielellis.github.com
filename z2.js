@@ -69,9 +69,9 @@ function buildMenu(container, treeBranch, submenu) {
     var i;
 
     menuContainer = document.createElement('div');
-    menuContainer.classList.add('menu-container');
+    menuContainer.className += 'menu-container';
     if (submenu) {
-        menuContainer.classList.add('submenu');
+        menuContainer.className += ' submenu';
     }
     menuContainer.hide();
 
