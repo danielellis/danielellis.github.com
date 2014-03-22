@@ -77,7 +77,7 @@ function buildMenu(container, treeBranch, submenu) {
 
     for (i = 0; i < treeBranch.length; i++) {
         menuItem = document.createElement('div');
-        menuItem.classList.add('menu-item');
+        menuItem.className += 'menu-item';
         menuItem.appendChild(document.createTextNode(treeBranch[i].text));
 
         if (Array.isArray(treeBranch[i].children)) {
