@@ -4,13 +4,13 @@ body {
     margin: 0;
 }
 
-section {
+.section {
     /* Include padding in the width calculations */
     box-sizing: border-box;
     padding: 10px;
 }
 
-#left, #right {
+.column {
     position: absolute;
     top: 0;
 }
