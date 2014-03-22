@@ -1,0 +1,26 @@
+.menu-item {
+    background: #eee;
+    padding: 10px;
+    font: 24px sans-serif;
+    text-align: left;
+    box-sizing: border-box;
+    width: 300px;
+    cursor: pointer;
+    position: relative;
+}
+
+.menu-item:hover {
+    background: #ddd;
+}
+
+.menu-container {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 48px;
+}
+
+.menu-container.submenu {
+    left: 300px;
+    top: 0;
+}
