@@ -1,9 +1,10 @@
 //
-// Arbitrary data structure for menu items. Each menu item contains two
-// properties: text data (expected string) and children (optional array of
-// additional menu items).
+// Data structure for menu items. Each menu item contains up to two properties:
+// text data (expected string) and children (optional array of additional menu
+// items).
 //
-var menuItems = [
+
+var menu = [
     {
         text: "Menu one",
         children: [
@@ -11,7 +12,7 @@ var menuItems = [
             { text: "Menu one, Item two" },
             { text: "Menu one, Item three" },
             { text: "Menu one, Item four" },
-            { text: "Menu one, Item five" },
+            { text: "Menu one, Item five" }
         ]
     },
     {
@@ -21,7 +22,7 @@ var menuItems = [
             { text: "Menu two, Item two" },
             { text: "Menu two, Item three" },
             { text: "Menu two, Item four" },
-            { text: "Menu two, Item five" },
+            { text: "Menu two, Item five" }
         ]
     },
     {
@@ -31,7 +32,7 @@ var menuItems = [
             { text: "Menu three, Item two" },
             { text: "Menu three, Item three" },
             { text: "Menu three, Item four" },
-            { text: "Menu three, Item five" },
+            { text: "Menu three, Item five" }
         ]
     },
     {
@@ -41,7 +42,7 @@ var menuItems = [
             { text: "Menu four, Item two" },
             { text: "Menu four, Item three" },
             { text: "Menu four, Item four" },
-            { text: "Menu four, Item five" },
+            { text: "Menu four, Item five" }
         ]
     },
     {
@@ -56,6 +57,10 @@ var menuItems = [
     },
 ];
 
+//
+// Helper functions for showing/hiding the menus
+//
+
 Element.prototype.show = function() {
     this.style.display = '';
 };
@@ -64,7 +69,12 @@ Element.prototype.hide = function() {
     this.style.display = 'none';
 };
 
-function buildMenu(container, treeBranch, submenu) {
+function buildMenu(container, menuItems, submenu) {
+    // Check for valid menuItems array. Immediately return if data is invalid.
+    if (!menuItems || !(menuItems instanceof Array)) {
+        console.warn('Invalid menu items array.', menuItems);
+        return;
+    }
     var menuContainer, menuItem;
     var i;
 
@@ -75,18 +85,28 @@ function buildMenu(container, treeBranch, submenu) {
     }
     menuContainer.hide();
 
-    for (i = 0; i < treeBranch.length; i++) {
+    for (i = 0; i < menuItems.length; i++) {
+        // First check to make sure the object is valid. Otherwise ignore
+        if (typeof menuItems[i] !== 'object'
+            || typeof menuItems[i].text !== 'string')
+        {
+            console.warn('Invalid menu item data.', menuItems[i]);
+            continue;
+        }
+
         menuItem = document.createElement('div');
         menuItem.className += 'menu-item';
-        menuItem.appendChild(document.createTextNode(treeBranch[i].text));
+        menuItem.appendChild(document.createTextNode(menuItems[i].text));
 
-        if (treeBranch[i].children instanceof Array) {
-            buildMenu(menuItem, treeBranch[i].children, true);
-        }
+        // If children is undefined, then undefined will get passed to the
+        // recursive call and handled there.
+        buildMenu(menuItem, menuItems[i].children, true);
 
         menuContainer.appendChild(menuItem);
     }
 
+    // Set up mouseenter and mouseleave listeners, compatible with all target
+    // browsers.
     container.addEventListener('mouseenter', function() {
         menuContainer.show();
     });
@@ -94,7 +114,8 @@ function buildMenu(container, treeBranch, submenu) {
         menuContainer.hide();
     });
 
+    // Finally, append the menu to the DOM.
     container.appendChild(menuContainer);
 }
 
-buildMenu(document.getElementById('menu-button'), menuItems);
+buildMenu(document.getElementById('menu-button'), menu);
