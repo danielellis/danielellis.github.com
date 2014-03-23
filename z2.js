@@ -80,7 +80,7 @@ function buildMenu(container, treeBranch, submenu) {
         menuItem.className += 'menu-item';
         menuItem.appendChild(document.createTextNode(treeBranch[i].text));
 
-        if (Array.isArray(treeBranch[i].children)) {
+        if (treeBranch[i].children instanceof Array) {
             buildMenu(menuItem, treeBranch[i].children, true);
         }
 
