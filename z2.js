@@ -69,6 +69,22 @@ Element.prototype.hide = function() {
     this.style.display = 'none';
 };
 
+//
+// addEventListener helper for IE8 compatibility
+//
+
+function eventHelper(object, event, callback) {
+    if (object.addEventListener) {
+        object.addEventListener(event, callback);
+    } else {
+        object.attachEvent('on' + event, callback);
+    }
+}
+
+//
+// Function called recursively to build menus of arbitrary depth from data structure above.
+//
+
 function buildMenu(container, menuItems, submenu) {
     // Check for valid menuItems array. Immediately return if data is invalid.
     if (!menuItems || !(menuItems instanceof Array)) {
@@ -77,7 +93,7 @@ function buildMenu(container, menuItems, submenu) {
     var menuContainer, menuItem;
     var i;
 
-    menuContainer = document.createElement('div');
+    menuContainer = document.createElement('ul');
     menuContainer.className += 'menu-container';
     if (submenu) {
         menuContainer.className += ' submenu';
@@ -85,30 +101,28 @@ function buildMenu(container, menuItems, submenu) {
     menuContainer.hide();
 
     for (i = 0; i < menuItems.length; i++) {
-        // First check to make sure the object is valid. Otherwise ignore
-        if (typeof menuItems[i] !== 'object'
-            || typeof menuItems[i].text !== 'string')
-        {
+        // First ensure the object is valid. Otherwise ignore.
+        if (typeof menuItems[i] !== 'object' || typeof menuItems[i].text !== 'string') {
             continue;
         }
 
-        menuItem = document.createElement('div');
+        menuItem = document.createElement('li');
         menuItem.className += 'menu-item';
         menuItem.appendChild(document.createTextNode(menuItems[i].text));
 
-        // If children is undefined, then undefined will get passed to the
-        // recursive call and handled there.
-        buildMenu(menuItem, menuItems[i].children, true);
+        // Only parse children if they exist.
+        if (menuItems[i].children) {
+            buildMenu(menuItem, menuItems[i].children, true);
+        }
 
         menuContainer.appendChild(menuItem);
     }
 
-    // Set up mouseenter and mouseleave listeners, compatible with all target
-    // browsers.
-    container.addEventListener('mouseenter', function() {
+    // Set up (on)mouseenter and (on)mouseleave listeners, compatible with all target browsers.
+    eventHelper(container, 'mouseenter', function() {
         menuContainer.show();
     });
-    container.addEventListener('mouseleave', function() {
+    eventHelper(container, 'mouseleave', function() {
         menuContainer.hide();
     });
 
@@ -116,4 +130,6 @@ function buildMenu(container, menuItems, submenu) {
     container.appendChild(menuContainer);
 }
 
-buildMenu(document.getElementById('menu-button'), menu);
+eventHelper(window, 'load', function() {
+    buildMenu(document.getElementById('menu-button'), menu);
+});
