@@ -54,7 +54,7 @@ var menu = [
             { text: "Menu five, Item four" },
             { text: "Menu five, Item five" }
         ]
-    },
+    }
 ];
 
 //
@@ -72,7 +72,6 @@ Element.prototype.hide = function() {
 function buildMenu(container, menuItems, submenu) {
     // Check for valid menuItems array. Immediately return if data is invalid.
     if (!menuItems || !(menuItems instanceof Array)) {
-        console.warn('Invalid menu items array.', menuItems);
         return;
     }
     var menuContainer, menuItem;
@@ -90,7 +89,6 @@ function buildMenu(container, menuItems, submenu) {
         if (typeof menuItems[i] !== 'object'
             || typeof menuItems[i].text !== 'string')
         {
-            console.warn('Invalid menu item data.', menuItems[i]);
             continue;
         }
 
