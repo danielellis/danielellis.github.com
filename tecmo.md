@@ -1,5 +1,5 @@
 Matt | | Dan | | Jimmy | | Clint | | Date | Notes
-- | - | - | - | - | - | -
+--- | --- | --- | --- | --- | --- | --- | --- | --- | ---
 Vikings | 6 | Cowboys | 0 |  |  |  |  | 2008-09-17 | Turnovers plague both teams in offensive struggle
 Eagles | 3 | 49ers | 35 |  |  |  |  | 2008-09-18 | John Taylor - 2 REC, 145 YDS, 2 TD
 Bills | 21 | Giants | 28 |  |  |  |  | 2008-09-19 | Fumble recovery for a touchdown on Bills' final drive seals the win
